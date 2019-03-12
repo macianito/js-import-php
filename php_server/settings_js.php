@@ -18,9 +18,3 @@ foreach($constants['user'] as $k=>$constant) {
     echo "var " . $k . " = '" . $constant . "';\n\r";
   }
 }
-
-?>
-
-var optionsApp = { // opcions de l'aplicacion
-   // app: 'path_app'
-};

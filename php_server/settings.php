@@ -8,52 +8,84 @@ error_reporting(E_ALL);
 
 $path_relative = substr(realpath(__DIR__), strlen(realpath($_SERVER['DOCUMENT_ROOT'])));
 
+define('PATH_SEP', '/'); // path separator
 
-define('APP_RELATIVE_PATH', str_replace('\\', '/', $path_relative));
+define('APP_RELATIVE_PATH', str_replace('\\', PATH_SEP, $path_relative));
 
-define('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . APP_RELATIVE_PATH . '/'); // APP PATH
+define('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . APP_RELATIVE_PATH . PATH_SEP); // APP PATH
 
 define('URL_RELATIVE_PATH', APP_RELATIVE_PATH);
 
-define('URL_ABS_PATH', 'http://' . $_SERVER['HTTP_HOST'] . URL_RELATIVE_PATH . '/');
+define('URL_ABS_PATH', 'http://' . $_SERVER['HTTP_HOST'] . URL_RELATIVE_PATH . PATH_SEP);
 
-define('PATH_SEP', '/'); // separador de elements ruta - depen sistema operatiu
-
-define('PREFIX_FN', '$'); // separador de elements ruta - depen sistema operatiu
+define('PREFIX_FN', '$'); // prefix javascript functions
 
 
-// Load App
+/*--------------------------------------------------------------
+  # Load APP
+--------------------------------------------------------------*/
 
-$app = isset($_POST['app']) ? $_POST['app'] : 'app1.php';
-include_once 'apps/' . $app;
+if(isset($_REQUEST['app'])) {
+  
+  $app = $_REQUEST['app'];
+  
+  if(substr($app, -4) != '.php') {
+    $app .= '.php'; 
+  }
+  
+  if(substr($app, 0, 1) != '/') { // no absolute path
+    $app = 'apps/' . $app; 
+  }
+ 
+
+} else { // default behaviour
+  
+  $app = 'apps/app.php';
+    
+}
+
+
+include_once $app;
+
+// End Load App
+
 
 if(!defined('FILES_PATH')) {
   define('FILES_PATH', $_SERVER['DOCUMENT_ROOT'] . APP_RELATIVE_PATH . '/../folder-test/'); // FILES PATH
 }
 
+/*--------------------------------------------------------------
+  # Load Core Methods if they have not been previously loaded
+--------------------------------------------------------------*/
 
+if(!isset($core_methods)) {
 
-// Reference to core PHP methods -- metodes admesos
+  // Reference to core PHP methods -- loaded methods
+  $defined_functions = get_defined_functions();
 
-$defined_functions = get_defined_functions();
+  $core_methods = array(
+    //'internal' => array('file_get_contents', 'file_put_contents', 'unlink', 'scandir'), // functions example
+    'internal' => $defined_functions['internal'],
+    'user'     => $defined_functions['user'],
+    'other'    => array(),
+    //'foo'    => array('Foo.index', 'Foo.get_Foo'), // object methods example
+    'Foo'      => get_methods_from_class('Foo') // object methods example
+  );
 
-$core_methods = array(
-  //'internal' => array('file_get_contents', 'file_put_contents', 'unlink', 'scandir'),
-  'internal' => $defined_functions['internal'],
-  'user'     => $defined_functions['user'],
-  'other'    => array(),
-  //'foo'    => array('Foo.index', 'Foo.get_Foo'), // cas metodes d'objectes
-  'Foo'      => get_methods_from_class('Foo') // cas metodes d'objectes
-);
+}
 
-$not_allowed_methods = array(
+$not_allowed_methods = array( // this methods are not allowed
   //'str_replace',
 );
 
 
-//die(print_r($coreMethods));
-
 function get_methods_from_class($class) {
+  
+  
+  if(!class_exists($class)) {
+    //echo 'console.warn("unknown class ' . $class . '")';
+    return array();
+  }
 
   $class_methods = get_class_methods($class);
 

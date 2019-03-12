@@ -1,5 +1,7 @@
 ;(function($, root, options) {
 
+  console.log('options:', options);
+
 
   var
 
@@ -10,9 +12,8 @@
     pluginVersion = "1.0.5",
 
     options = options || {},
-
-    // App
-    app = options.app || "app1.php", // app que s'executa
+    
+    app     = options.app,
 
     // Reference to core PHP methods Es carrega a load_methods.php
 
@@ -36,41 +37,24 @@
       //console.log(':: ', func, args);
 
       // convert to php types ???? XXX S'ha de mirar
-      for(var i = 0; i < args.length; i++) {
+      /* for(var i = 0; i < args.length; i++) {
         if(typeof args[i] == 'string') {
           //args[i] = "'" + args[i] + "'";
         }
-      }
+      }*/
+     
+     //console.warn('warning', args);
 
       var data = {
         php_function: func,
-        args: args
-        //app: app
+        args: args,
+        app : app
       };
 
       return getRemotePromise(data);
 
     }
 
-    function $php_callback(func, callback, args) { // asincrona
-      // aqui fem ajax per enviar a php i es tracta valor pero en callback
-      //console.log(func, callback, args);
-
-      // convert to php types ???? XXX S'ha de mirar
-      for(var i = 0; i < args.length; i++) {
-        if(typeof args[i] == 'string') {
-          //args[i] = "'" + args[i] + "'";
-        }
-      }
-
-       var data = {
-        php_function: func,
-        args: args
-      };
-
-      return getRemote(data, callback);
-
-    }
 
 
     !function setupFunctions() {
@@ -82,13 +66,9 @@
           var phpFunction = coreMethods[i][j];
 
 
-          var newCreatedFunction = (function(nameFunction) { // root es l’objecte globalvar callback = arguments[0];
+          var newCreatedFunction = (function(nameFunction) {
 
             return function () {
-
-              //var callback = arguments[0];
-              //delete arguments[0]; // extraiem primer element
-              //return $php_callback(nameFunction, arguments);
 
               return $php(nameFunction, arguments); // call function
 
@@ -114,14 +94,16 @@
     }();
 
 
-    function getRemotePromise(data, callback) {
+    function getRemotePromise(request) {
+      
+      var request = JSON.parse(JSON.stringify(request)); // clone object
 
       return new Promise(function(resolve, reject) {
 
         $.ajax({
           type: "POST",
           url: remoteUrl,
-          data: data,
+          data: request,
           beforeSend: function(jqXHR) {
             activeProcesses++;
             loadingObj && loadingObj.show();
@@ -151,7 +133,7 @@
 
           } else if(objson.error) {
 
-            alert(objson.error);
+            alert(objson.error + ' - function: ' + request.php_function);
 
             reject(objson.error);
 
@@ -176,66 +158,6 @@
         }); // end ajax
 
       }); // end promise
-    }
-
-
-    function getRemote(data, callback) {
-
-      return $.ajax({
-        type: "POST",
-        url: remoteUrl,
-        data: data,
-        beforeSend: function(jqXHR) {
-          activeProcesses++;
-          loadingObj && loadingObj.show();
-        }
-      }).done(function( data ) {
-
-        try {
-
-          var objson = jQuery.parseJSON(data);
-
-        } catch(e) {
-
-          objson = {};
-
-          if(/error|warning/.test(data.toLowerCase())) {
-
-            objson = {};
-
-            objson.error = data; // altres errors no controlats
-          }
-
-        }
-
-        if(objson.ok && callback) {
-
-          callback(objson.ok);
-
-        } else if(objson.error) {
-
-          alert(objson.error);
-
-          reject(objson.error);
-
-        } else {
-
-          alert('Unexpected error');
-
-        }
-
-      }).fail(function(jqXHR, textStatus) {
-
-        alert("Request failed: " + textStatus);
-
-      }).always(function() {
-
-        if(--activeProcesses == 0 && loadingObj) {
-          loadingObj.hide();
-        }
-
-      }); // end ajax
-
     }
 
 
