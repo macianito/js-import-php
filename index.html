@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>PHP SERVER</title>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script> -->
+    <script type="text/javascript" src="php_server/js/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="php_server/php_server.php"></script>
+
+    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css" media="all" /> -->
+    <link rel="stylesheet" href="php_server/css/style.css" type="text/css" media="all" />
+
+
+  </head>
+  <body>
+
+  <div id="container">
+    <div id="loader-fn"> LOADING...</div>
+    <pre id="result"> </pre>
+    <pre id="result2"> </pre>
+
+   <script>
+
+     var optionsApp = {
+       app        : 'app1', // quina aplicacio s'executa
+       loadingObj : jQuery('#loader-fn')
+     };
+
+     var resultObj = jQuery('#result'),
+         resultObj2 = jQuery('#result2');
+
+       //scandir(processScandir, "./folder-test/");
+
+       //Foo.get_Foo(processFoo, "arrgg1", 6); // has de posar o no les cometes
+
+       console.log(window);
+
+       $scandir(FILES_PATH).then(function(result) {
+         resultObj.html(result.join('<br>') + '<br><br>');
+       });
+
+       $system('ls -l').then(function(result) {
+         resultObj.append(result + '<br><br>');
+       });
+
+       $str_replace(' ').then(function(result) {
+         resultObj.append(result + '<br><br>');
+       });
+
+       $Foo.get_Foo("arrgg1", 6).then(function(result) { // has de posar o no les cometes
+         processFoo(result);
+       });
+
+       $Foo.get_Params(["param1", "param2"]).then(function(result) { // has de posar o no les cometes
+         resultObj2.append(result);
+       });
+
+       $Foo.get_Params({0: "param11", 1: "param12"}).then(function(result) { // has de posar o no les cometes
+         resultObj2.append(result);
+       });
+
+
+      function processFoo(data) {
+        console.log(data);
+        resultObj2.html(data);
+     }
+
+     /*
+     file_get_contents(processFileGetContents, "./folder-test/file1.php");
+
+     function processFileGetContents(data) {
+        alert(data)
+        resultObj.html(data.escape());
+     }
+     */
+
+   </script>
+
+  </div>
+
+  </body>
+
+</html>
