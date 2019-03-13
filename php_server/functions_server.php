@@ -19,7 +19,7 @@ try {
      if(is_class_method($function)) { // http://stackoverflow.com/questions/980708/calling-method-of-object-of-object-with-call-user-func
        //$result = call_user_func_array(array($object_method[0], $object_method[1]), $args);
 
-       array_walk($args, 'sanitize_args'); // afegeix cometes a cada
+       array_walk($args, 'sanitize_args'); // afegeix cometes a cada argument
 
        $controller = null;
 
