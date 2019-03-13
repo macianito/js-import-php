@@ -14,7 +14,7 @@ try {
   if(isset($_POST['php_function'])) {
 
      $function = $_POST['php_function'];
-     $args = isset($_POST['args']) ? $_POST['args'] : []; // function can have or not arguments
+     $args = isset($_POST['args']) ? $_POST['args'] : []; // function can have, or not have arguments
 
      if(is_class_method($function)) { // http://stackoverflow.com/questions/980708/calling-method-of-object-of-object-with-call-user-func
        //$result = call_user_func_array(array($object_method[0], $object_method[1]), $args);

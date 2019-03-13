@@ -4,15 +4,14 @@
     <title>PHP SERVER</title>
     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script> -->
     <script type="text/javascript" src="php_server/js/jquery-2.2.0.min.js"></script>
-    
+
     <script>
      var optionsApp = {
        loadingObj : jQuery('#loader-fn'),
-       app        : '/var/www/html/testfn'
+       //app        : '/var/www/html/testfn'
      };
     </script>
-    
-    
+
     <script type="text/javascript" src="php_server/php_server.php?app=/var/www/html/testfn"></script>
 
     <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css" media="all" /> -->
@@ -24,11 +23,10 @@
 
   <div id="container">
     <div id="loader-fn"> LOADING...</div>
-    
-    
+
+
     <pre id="result"> </pre>
     <pre id="result2"> </pre>
-    
 
    <script>
 
@@ -39,7 +37,7 @@
 
        //Foo.get_Foo(processFoo, "arrgg1", 6); // has de posar o no les cometes
 
-       console.log(window);
+       //console.log(window);
 
        $scandir(FILES_PATH).then(function(result) {
          resultObj.html(result.join('<br>') + '<br><br>');

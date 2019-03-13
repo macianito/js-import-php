@@ -12,7 +12,7 @@
     pluginVersion = "1.0.5",
 
     options = options || {},
-    
+
     app     = options.app,
 
     // Reference to core PHP methods Es carrega a load_methods.php
@@ -42,7 +42,7 @@
           //args[i] = "'" + args[i] + "'";
         }
       }*/
-     
+
      //console.warn('warning', args);
 
       var data = {
@@ -95,7 +95,7 @@
 
 
     function getRemotePromise(request) {
-      
+
       var request = JSON.parse(JSON.stringify(request)); // clone object
 
       return new Promise(function(resolve, reject) {

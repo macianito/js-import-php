@@ -1,12 +1,9 @@
 <?php
-//header('Access-Control-Allow-Origin: *');
-//header('Content-Type: text/javascript');
 
 include_once 'settings.php';
 
 $constants = get_defined_constants(true);
 
-//print_r($constants);
 
 echo "// javascript configuration constants \n\r";
 
@@ -18,3 +15,21 @@ foreach($constants['user'] as $k=>$constant) {
     echo "var " . $k . " = '" . $constant . "';\n\r";
   }
 }
+
+
+echo "// set optionsApp if no defined \n\r";
+?>
+    
+if(typeof optionsApp == 'undefined') {
+  var optionsApp = {};
+}
+    
+<?php
+
+echo "// set app option \n\r";
+
+if(isset($_GET['app'])) { // initial enviroment load script set app option ?>  
+    
+  optionsApp.app = '<?php echo $_GET['app']; ?>';
+    
+<?php }

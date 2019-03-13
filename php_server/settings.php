@@ -1,6 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
+ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
@@ -18,7 +20,7 @@ define('URL_RELATIVE_PATH', APP_RELATIVE_PATH);
 
 define('URL_ABS_PATH', 'http://' . $_SERVER['HTTP_HOST'] . URL_RELATIVE_PATH . PATH_SEP);
 
-define('PREFIX_FN', '$'); // prefix javascript functions
+define('PREFIX_FN', '$'); // javascript functions prefix
 
 
 /*--------------------------------------------------------------
@@ -26,22 +28,21 @@ define('PREFIX_FN', '$'); // prefix javascript functions
 --------------------------------------------------------------*/
 
 if(isset($_REQUEST['app'])) {
-  
+
   $app = $_REQUEST['app'];
-  
+
   if(substr($app, -4) != '.php') {
-    $app .= '.php'; 
+    $app .= '.php';
   }
-  
+
   if(substr($app, 0, 1) != '/') { // no absolute path
-    $app = 'apps/' . $app; 
+    $app = 'apps/' . $app;
   }
- 
 
 } else { // default behaviour
-  
+
   $app = 'apps/app.php';
-    
+
 }
 
 
@@ -74,14 +75,16 @@ if(!isset($core_methods)) {
 
 }
 
-$not_allowed_methods = array( // this methods are not allowed
+if(!isset($not_allowed_methods)) {
+  $not_allowed_methods = array( // this methods are not allowed
   //'str_replace',
-);
+  );
+}
 
 
 function get_methods_from_class($class) {
-  
-  
+
+
   if(!class_exists($class)) {
     //echo 'console.warn("unknown class ' . $class . '")';
     return array();
