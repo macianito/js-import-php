@@ -1,12 +1,17 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
+/*--------------------------------------------------------------
+  # Setup display errors
+--------------------------------------------------------------*/
+
 ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-//substr(str_replace('\\', '/', realpath(dirname(__DIR__))), strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))))
+/*--------------------------------------------------------------
+  # Define APP constants
+--------------------------------------------------------------*/
 
 $path_relative = substr(realpath(__DIR__), strlen(realpath($_SERVER['DOCUMENT_ROOT'])));
 
@@ -22,6 +27,12 @@ define('URL_ABS_PATH', 'http://' . $_SERVER['HTTP_HOST'] . URL_RELATIVE_PATH . P
 
 define('PREFIX_FN', '$'); // javascript functions prefix
 
+
+/*--------------------------------------------------------------
+  # Include libraries
+--------------------------------------------------------------*/
+
+include_once 'includes/helpers.php';
 
 /*--------------------------------------------------------------
   # Load APP
@@ -81,34 +92,4 @@ if(!isset($not_allowed_methods)) {
   );
 }
 
-
-function get_methods_from_class($class) {
-
-
-  if(!class_exists($class)) {
-    //echo 'console.warn("unknown class ' . $class . '")';
-    return array();
-  }
-
-  $class_methods = get_class_methods($class);
-
-  foreach ($class_methods as $k=>$method_name) {
-
-    $reflect = new ReflectionMethod($class, $method_name);
-
-    if ($reflect->isPublic()) {
-
-      $class_methods[$k] = $class . '.' . $method_name;
-
-    } else {
-
-      unset($class_methods[$k]);
-
-    }
-
-  }
-
-  return $class_methods;
-
-}
 

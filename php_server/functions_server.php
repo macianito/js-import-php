@@ -2,7 +2,6 @@
 
 include_once 'settings.php';
 
-include_once 'includes/helpers.php';
 include_once 'includes/manage_errors.php';
 
 
@@ -19,7 +18,7 @@ try {
      if(is_class_method($function)) { // http://stackoverflow.com/questions/980708/calling-method-of-object-of-object-with-call-user-func
        //$result = call_user_func_array(array($object_method[0], $object_method[1]), $args);
 
-       array_walk($args, 'sanitize_args'); // afegeix cometes a cada argument
+       array_walk($args, 'prepare_args'); // afegeix cometes a cada argument
 
        $controller = null;
 
@@ -49,7 +48,7 @@ try {
        // execute class method
        ob_start();
 
-         $result = $controller->execute_method($object_method[1], $args);
+         $result = call_user_func_array(array($controller, $object_method[1]), $args);
 
        $rbuffer = ob_get_clean(); // per si fa echo la funcio o hi ha errors o warnings
 

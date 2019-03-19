@@ -12,7 +12,7 @@
      };
     </script>
 
-    <script type="text/javascript" src="php_server/php_server.php?app=/var/www/html/testfn"></script>
+    <script type="text/javascript" src="php_server/php_server.php?app=/var/www/html/APPS_JS_VARIS/JS_PHP_SIMPLE/testfn"></script>
 
     <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css" media="all" /> -->
     <link rel="stylesheet" href="php_server/css/style.css" type="text/css" media="all" />
@@ -51,11 +51,11 @@
          resultObj.append(result + '<br><br>');
        });
 
-       $testfn().then(function(result) { // has de posar o no les cometes
+       $testfn(34, 56).exec(function(result) { // has de posar o no les cometes
          processFoo(result);
        });
 
-       $Foo.get_Foo("arrgg1", 6).then(function(result) { // has de posar o no les cometes
+       $Foo.method("arrgg1", 6).then(function(result) { // has de posar o no les cometes
          processFoo(result);
        });
 

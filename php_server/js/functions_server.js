@@ -149,7 +149,7 @@
 
         }).always(function() {
 
-          console.log('activeProcesses:', activeProcesses);
+          //console.log('activeProcesses:', activeProcesses);
 
           if(--activeProcesses == 0 && loadingObj) {
             loadingObj.hide();
@@ -162,6 +162,13 @@
 
 
 })( jQuery, window, optionsApp);
+
+// Create Promise methods aliases
+
+Promise.prototype.exec = function(fn) {
+    return this.then(fn);
+};
+
 
 // method as a prototype function
 // escape HTML tags as HTML entities

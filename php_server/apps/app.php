@@ -1,14 +1,7 @@
 <?php
 
-class Controller {
-   public function __construct() {}
+class Foo {
 
-   public function execute_method($method, $args) {
-      return call_user_func_array(array($this, $method), $args);
-   }
-}
-
-class Foo extends Controller {
 
     public $prop1 = 'Foo Member Variable 1';
     public $prop2 = 'Foo Member Variable 2';
