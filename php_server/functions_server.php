@@ -91,6 +91,14 @@ try {
 
      }
 
+     if(!$result) { // a no displayed error has ocurred;
+
+       $last_error = error_get_last();
+
+       $result = $last_error['message'];
+
+     }
+
      die(json_encode (array('error' => $result)));
 
   }

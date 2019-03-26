@@ -1,6 +1,16 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
+
+/*--------------------------------------------------------------
+  # Local Access only
+--------------------------------------------------------------*/
+
+if ($_SERVER['SERVER_ADDR'] != $_SERVER['REMOTE_ADDR']){
+  $this->output->set_status_header(400, 'No Remote Access Allowed');
+  exit; //just for good measure
+}
+
 /*--------------------------------------------------------------
   # Setup display errors
 --------------------------------------------------------------*/
@@ -26,7 +36,6 @@ define('URL_RELATIVE_PATH', APP_RELATIVE_PATH);
 define('URL_ABS_PATH', 'http://' . $_SERVER['HTTP_HOST'] . URL_RELATIVE_PATH . PATH_SEP);
 
 define('PREFIX_FN', '$'); // javascript functions prefix
-
 
 /*--------------------------------------------------------------
   # Include libraries

@@ -14,9 +14,14 @@ function prepare_args(&$arg) {
  *
  * */
 
-function is_class_method($class_method) {
-  $object_method = explode('.', $class_method);
-  return (sizeof($object_method) > 1) ;
+function is_class_method($function) {
+
+  $result = preg_match('/([A-Za-z0-9-_]*)\.([A-Za-z0-9-_]*)/', $function);
+
+  return $result === 1;
+
+  //$object_method = explode('.', $class_method);
+  //return (sizeof($object_method) > 1) ;
 }
 
 /*

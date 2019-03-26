@@ -15,13 +15,3 @@ include_once 'js/functions_server.js';
 var init = typeof initApp != 'undefined' ? initApp : function() {};
 
 init();
-
-
-
-
-
-
-
-
-
-
