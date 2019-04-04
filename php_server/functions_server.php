@@ -1,4 +1,21 @@
 <?php
+/*
+ * This file is part of JS PHP Import.
+ *
+ * (c) Ivan Macià Galan <ivanmaciagalan@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @package    JS PHP Import
+ * @author     Ivan Macià Galan <ivanmaciagalan@gmail.com>
+ * @copyright  Copyright (c) 2019, Ivan Macià Galan. (http://mazius.org/)
+ * @license    https://opensource.org/licenses/MIT MIT License
+ * @version    1.0.0
+ * @link       https://github.com/macianito/js-import-php GitHub - Mazius.org
+ * @since      File available since Release 1.0.0
+ *
+ */
 
 include_once 'settings.php';
 
@@ -79,27 +96,27 @@ try {
 
      }
 
-     if($rbuffer) { // si la funcio ha escopit (echoed) contingut. En cas que no llavors ha retornat alguna cosa
-       $result = $rbuffer;
-     }
+     $result = $rbuffer ?: $result; // si la funcio ha escopit (echoed) contingut. En cas que no llavors ha retornat alguna cosa
 
-     //$result = file_get_contents('./folder-test/file1.php');
+     $last_error = error_get_last();
 
-     if($result) {
+     if($result && !$last_error) { // php echoed error strings are catched with $last_error
 
        die(json_encode (array('ok' => $result)));
 
      }
 
-     if(!$result) { // a no displayed error has ocurred;
-
-       $last_error = error_get_last();
+     if($last_error) {
 
        $result = $last_error['message'];
 
+     } elseif($result === null) {
+
+       $result = "Perhaps the function " . $function . " doesn't return any value";
+
      }
 
-     die(json_encode (array('error' => $result)));
+     die(json_encode (array('error' => strip_tags($result))));
 
   }
 

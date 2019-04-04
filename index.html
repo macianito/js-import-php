@@ -12,7 +12,7 @@
      };
     </script>
 
-    <script type="text/javascript" src="php_server/php_server.php?app=/var/www/html/APPS_JS_VARIS/JS_PHP_SIMPLE/testfn"></script>
+    <script type="text/javascript" src="php_server/?app=/var/www/html/APPS_JS_VARIS/JS_PHP_SIMPLE/testfn"></script>
 
     <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css" media="all" /> -->
     <link rel="stylesheet" href="php_server/css/style.css" type="text/css" media="all" />
@@ -55,6 +55,10 @@
          processFoo(result);
        });
 
+       $no_return(' ').then(function(result) {
+
+       });
+
        $Foo.method("arrgg1", 6).then(function(result) { // has de posar o no les cometes
          processFoo(result);
        });
@@ -66,6 +70,8 @@
        $Foo.get_Params({0: "param11", 1: "param12"}).then(function(result) { // has de posar o no les cometes
          resultObj2.append(result);
        });
+
+
 
 
       function processFoo(data) {

@@ -23,3 +23,5 @@ class Foo {
 }
 
 $Foo = new Foo();
+
+

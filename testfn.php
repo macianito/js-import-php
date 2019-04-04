@@ -8,8 +8,13 @@ class Foo {
 
     public static function method()
     {
-     
-       return 'Static method'; 
+
+       return 'Static method';
 
     }
+
+}
+
+function no_return() {
+  $t = 6;
 }

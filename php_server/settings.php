@@ -1,4 +1,14 @@
 <?php
+/**
+ * Settings
+ *
+ * File containing configuration settings
+ *
+ *
+ * @package Php Import
+ * @since 1.0.0
+ */
+
 header('Access-Control-Allow-Origin: *');
 
 
