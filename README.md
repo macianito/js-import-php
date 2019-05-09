@@ -5,17 +5,27 @@
 
 * **Ivan Macià** - [http://mazius.org](http://mazius.org)
 
+## License
 
-Environments in which to use JS PHP Import
---------------------------------------
+MIT
+
+## Environments in which to use JS PHP Import
 
 - Browser support
 
 ## Requires
-PHP 5.3 or Higher
-A POSIX compatible operating system (Linux, OSX, BSD)
-POSIX and PCNTL extensions for PHP
+
+- PHP
+
+### Usage ###
+
+Download the [code](https://github.com/macianito/js-import-php/) and include it in your HTML.
+
+```html
+<script type="text/javascript" src="path_to_php_server_folder/php_server/js/jquery-2.2.0.min.js"></script>
+```
+
 
 ### Live Example ###
 
-[http://phplandia.com//examples/Table/table.html](http://phplandia.com//examples/Table/table.html)
+[http://phplandia.org/php_server/index.html](http://phplandia.org/php_server/index.html)
