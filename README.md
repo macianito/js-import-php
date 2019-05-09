@@ -44,9 +44,9 @@ This example will put the result of each called php function into a container on
 
 [http://phplandia.org/php_server/index.html](http://phplandia.org/php_server/index.html)
 
-## Authors
+## Author
 
-* **Ivan Macià** - [http://mazius.org](http://mazius.org)
+**Ivan Macià** - [http://mazius.org](http://mazius.org)
 
 ## License
 
