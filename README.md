@@ -1,6 +1,6 @@
 # [JS PHP Import](https://github.com/macianito/js-import-php/)
 
-**JS PHP Import** imports php functions and classes to javascript environment thus they can be accessed as javascript functions
+**JS PHP Import** imports php functions and classes to javascript environment thus they can be accessed as javascript functions and methods of a class
 
 ## Table of contents
 
