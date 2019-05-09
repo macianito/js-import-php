@@ -28,7 +28,7 @@
 Download the [code](https://github.com/macianito/js-import-php/) and include it in your HTML. 
 
 ```html
-<script type="text/javascript" src="path_to_php_server/php_server/?app=path_to_app"></script>
+<script type="text/javascript" src="path_to_php_server/?app=path_to_app"></script>
 ```
 
 ## Examples
@@ -36,7 +36,7 @@ Download the [code](https://github.com/macianito/js-import-php/) and include it 
 We have several examples [on the website](https://reactjs.org/). Here is the first one to get you started:
 
 ```jsx
-$scandir(FOLDER_PATH).then(function(result) {
+$scandir(PATH_TO_FOLDER).then(function(result) {
   resultObj.html(result.join('<br>'));
 });
 
