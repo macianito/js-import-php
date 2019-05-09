@@ -2,6 +2,18 @@
 
 **JS PHP Import** imports php functions and classes to javascript environment thus they can be accessed as javascript functions
 
+## Table of contents
+
+- [Environments in which to use JS PHP Import](#environments-in-which-to-use-js-php-import)
+- [Requires](#requires)
+- [Usage](#usage)
+- [Examples](#bugs-and-feature-requests)
+- [Live Example](#live-example)
+- [License](#license)
+- [Author](#author)
+- [Contact Me](#contact-me)
+
+
 ## Environments in which to use JS PHP Import
 
 - Web Browser
@@ -16,7 +28,7 @@
 Download the [code](https://github.com/macianito/js-import-php/) and include it in your HTML. 
 
 ```html
-<script type="text/javascript" src="path_to_php_server_folder/php_server/?app=path_to_app"></script>
+<script type="text/javascript" src="path_to_php_server/php_server/?app=path_to_app"></script>
 ```
 
 ## Examples
@@ -40,14 +52,22 @@ $str_replace(' ').then(function(result) {
 
 This example will put the result of each called php function into a container on the page.
 
-## Live Example ###
+## Live Example
 
 [http://phplandia.org/php_server/index.html](http://phplandia.org/php_server/index.html)
 
-## Author
-
-**Ivan Macià** - [http://mazius.org](http://mazius.org)
 
 ## License
 
 **JS PHP Import** is [MIT licensed](./LICENSE).
+
+## Author
+
+**Ivan Macià**
+- <http://mazius.org>
+- <https://twitter.com/vil_cohaagen>
+
+
+## Contact Me  
+  
+- Email Me: ivan@mazius.org
