@@ -1,5 +1,5 @@
 ## What is it
-JS PHP Import imports php functions and classes to javascript environment thus to be accesed as javascript code
+JS PHP Import imports php functions and classes to javascript environment thus they can be accessed as javascript functions
 
 
 ## Requires
