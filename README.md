@@ -17,7 +17,7 @@ MIT
 
 - PHP
 
-### Usage ###
+## Usage
 
 Download the [code](https://github.com/macianito/js-import-php/) and include it in your HTML.
 
