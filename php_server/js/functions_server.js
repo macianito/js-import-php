@@ -1,7 +1,6 @@
 ;(function($, root, options) {
 
-  console.log('options:', options);
-
+  //console.log('options:', options);
 
   var
 
@@ -15,8 +14,6 @@
 
     app     = options.app,
 
-    // Reference to core PHP methods Es carrega a load_methods.php
-
     loadingObj = null,
 
     activeProcesses = 0,
@@ -25,15 +22,13 @@
 
     jQuery(document).ready(function() {
 
-      loadingObj = options.loadingObj || jQuery('#loader-fn'); // objecte que mostrara el loading
+      loadingObj = jQuery('#' + options.loadingObj) || jQuery('#loader-fn'); // loading object
 
     });
 
-    // URL APP - http://127.0.0.1/APPS_JS_VARIS/JS_PHP/index.html
-
 
     function $php(func, args) { // promise
-      // aqui fem ajax per enviar a php i retornar valor
+
       //console.log(':: ', func, args);
 
       // convert to php types ???? XXX S'ha de mirar
@@ -42,8 +37,6 @@
           //args[i] = "'" + args[i] + "'";
         }
       }*/
-
-     //console.warn('warning', args);
 
       var data = {
         php_function: func,
@@ -59,11 +52,11 @@
 
     !function setupFunctions() {
 
-      for(var i in coreMethods) {
+      for(var i in exportedFns) {
 
-        for(var len = coreMethods[i].length, j = 0; j < len; j++) {
+        for(var len = exportedFns[i].length, j = 0; j < len; j++) {
 
-          var phpFunction = coreMethods[i][j];
+          var phpFunction = exportedFns[i][j];
 
 
           var newCreatedFunction = (function(nameFunction) {
@@ -76,7 +69,7 @@
 
           })(phpFunction);
 
-          var _aux = coreMethods[i][j].split('.');
+          var _aux = exportedFns[i][j].split('.');
 
           if(_aux.length > 1) { // cas metodes d'objectes
 
@@ -86,7 +79,7 @@
 
             root[PREFIX_FN + _aux[0]][_aux[1]] = newCreatedFunction;
           } else {
-            root[PREFIX_FN + coreMethods[i][j]] = newCreatedFunction;
+            root[PREFIX_FN + exportedFns[i][j]] = newCreatedFunction;
           }
         }
       }
@@ -109,8 +102,6 @@
             loadingObj && loadingObj.show();
           }
         }).done(function( data ) {
-
-          //console.log('i');
 
           try {
 
@@ -149,9 +140,12 @@
 
         }).always(function() {
 
-          //console.log('activeProcesses:', activeProcesses);
+          console.log('activeProcesses:', activeProcesses);
 
-          if(--activeProcesses == 0 && loadingObj) {
+          activeProcesses--;
+
+          if(activeProcesses == 0 && loadingObj) {
+            console.log('processes finished', loadingObj);
             loadingObj.hide();
           }
 
@@ -163,7 +157,7 @@
 
 })( jQuery, window, optionsApp);
 
-// Create Promise methods aliases
+// Create Promise methods alias
 
 Promise.prototype.exec = function(fn) {
     return this.then(fn);

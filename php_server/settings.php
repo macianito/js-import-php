@@ -89,16 +89,15 @@ if(!defined('FILES_PATH')) {
   # Load Core Methods if they have not been previously loaded
 --------------------------------------------------------------*/
 
-if(!isset($core_methods)) {
+if(!isset($exported_fns)) {
 
   // Reference to core PHP methods -- loaded methods
   $defined_functions = get_defined_functions();
 
-  $core_methods = array(
+  $exported_fns = array(
     //'internal' => array('file_get_contents', 'file_put_contents', 'unlink', 'scandir'), // functions example
     'internal' => $defined_functions['internal'],
     'user'     => $defined_functions['user'],
-    'other'    => array(),
     //'foo'    => array('Foo.index', 'Foo.get_Foo'), // object methods example
     'Foo'      => get_methods_from_class('Foo') // object methods example
   );

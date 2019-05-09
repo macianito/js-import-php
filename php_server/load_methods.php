@@ -19,7 +19,7 @@
 
 include_once 'settings.php';
 
-echo 'var coreMethods = ' . json_encode($core_methods);
+echo 'var exportedFns = ' . json_encode($exported_fns);
 
 
 
