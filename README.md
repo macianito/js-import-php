@@ -1,4 +1,5 @@
-# [JS PHP Import](https://github.com/macianito/js-import-php/)
+# [JS PHP Import](https://github.com/macianito/js-import-php/)  &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]
+
 JS PHP Import imports php functions and classes to javascript environment thus they can be accessed as javascript functions
 
 ## Environments in which to use JS PHP Import
@@ -15,7 +16,8 @@ JS PHP Import imports php functions and classes to javascript environment thus t
 Download the [code](https://github.com/macianito/js-import-php/) and include it in your HTML.
 
 ```html
-<script type="text/javascript" src="path_to_php_server_folder/php_server/js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="path_to_php_server_folder/php_server/?app=path_to_app"></script>
+```
 
 ## Examples
 
@@ -48,4 +50,4 @@ This example will put the result of each called php function into a container on
 
 ## License
 
-React is [MIT licensed](./LICENSE).
+**JS PHP Import** is [MIT licensed](./LICENSE).
