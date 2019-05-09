@@ -25,7 +25,7 @@
 
 ## Usage
 
-Download the [code](https://github.com/macianito/js-import-php/) that is in the *php_server* folder of the project and include it in your HTML. 
+Download the [code](https://github.com/macianito/js-import-php/) that is in the folder *php_server* of the project and include it in your HTML. 
 
 ```html
 <script type="text/javascript" src="path_to_php_server/?app=path_to_app"></script>
