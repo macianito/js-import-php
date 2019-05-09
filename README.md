@@ -25,7 +25,7 @@
 
 ## Usage
 
-Download the [code](https://github.com/macianito/js-import-php/) and include it in your HTML. 
+Download the [code](https://github.com/macianito/js-import-php/) that is in the *php_server* folder of the project and include it in your HTML. 
 
 ```html
 <script type="text/javascript" src="path_to_php_server/?app=path_to_app"></script>
@@ -33,7 +33,7 @@ Download the [code](https://github.com/macianito/js-import-php/) and include it 
 
 ## Examples
 
-We have several examples [on the website](https://reactjs.org/). Here is the first one to get you started:
+We have several examples [on the website](https://mazius.org/). Here is one to get you started:
 
 ```jsx
 $scandir(PATH_TO_FOLDER).then(function(result) {
