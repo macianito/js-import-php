@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>· PHP SERVER ·</title>
+    <title> PHP SERVER </title>
     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script> -->
     <script type="text/javascript" src="php_server/js/jquery-2.2.0.min.js"></script>
 
@@ -26,12 +26,10 @@
 
 
     <pre id="result"> </pre>
-    <pre id="result2"> </pre>
 
    <script>
 
-     var resultObj = jQuery('#result'),
-         resultObj2 = jQuery('#result2');
+     var resultObj = jQuery('#result');
 
        //scandir(processScandir, "./folder-test/");
 
@@ -52,32 +50,30 @@
        });
 
        $testfn(34, 56).exec(function(result) { // has de posar o no les cometes
-         processFoo(result);
+         return $testfn(34, result);
+       }).exec(function(result) { // has de posar o no les cometes
+         resultObj.append('result: ' + result + '<br><br>');
        });
 
-       $no_return(' ').then(function(result) {
+       $no_return(' ').exec(function(result) {
 
+       }).error(function(result) {
+          alert('catched error: ' + result);
        });
 
        $Foo.method("arrgg1", 6).then(function(result) { // has de posar o no les cometes
-         processFoo(result);
+         resultObj.append(result + '<br><br>');
        });
 
        $Foo.get_Params(["param1", "param2"]).then(function(result) { // has de posar o no les cometes
-         resultObj2.append(result);
+         resultObj.append(result + '<br><br>');
        });
 
        $Foo.get_Params({0: "param11", 1: "param12"}).then(function(result) { // has de posar o no les cometes
-         resultObj2.append(result);
+         resultObj.append(result + '<br><br>');
        });
 
 
-
-
-      function processFoo(data) {
-        console.log(data);
-        resultObj2.html(data);
-     }
 
      /*
      file_get_contents(processFileGetContents, "./folder-test/file1.php");

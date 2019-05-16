@@ -1,42 +1,36 @@
 ;(function($, root, options) {
 
-  //console.log('options:', options);
 
   var
 
     // Plugin name
-    pluginName = "js-php",
+    pluginName      = "js-php",
 
     // Plugin version
-    pluginVersion = "1.0.5",
+    pluginVersion   = "1.0.5",
 
-    options = options || {},
+    options         = options || {},
 
-    app     = options.app,
+    app             = options.app || APP_PATH + 'apps/app',
 
-    loadingObj = null,
+    loadingObj      = null,
 
-    activeProcesses = 0,
+    activeProcesses = 0, // number of running processes
 
-    remoteUrl = URL_ABS_PATH + '/functions_server.php';
+    remoteUrl       = URL_ABS_PATH + '/functions_server.php';
 
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
 
-      loadingObj = jQuery('#' + options.loadingObj) || jQuery('#loader-fn'); // loading object
+      loadingObj = (typeof options.loadingObj  !== 'undefined')
+        ? $('#' + options.loadingObj)
+        : ($('#loader-fn').lenght > 0)
+          ? $('#loader-fn')
+          : null;
 
     });
 
 
-    function $php(func, args) { // promise
-
-      //console.log(':: ', func, args);
-
-      // convert to php types ???? XXX S'ha de mirar
-      /* for(var i = 0; i < args.length; i++) {
-        if(typeof args[i] == 'string') {
-          //args[i] = "'" + args[i] + "'";
-        }
-      }*/
+    function $php(func, args) {
 
       var data = {
         php_function: func,
@@ -44,11 +38,12 @@
         app : app
       };
 
-      return getRemotePromise(data);
+      return getRemote(data);
 
     }
 
 
+    // create javascript functions
 
     !function setupFunctions() {
 
@@ -59,7 +54,7 @@
           var phpFunction = exportedFns[i][j];
 
 
-          var newCreatedFunction = (function(nameFunction) {
+          var jsFunction = (function(nameFunction) {
 
             return function () {
 
@@ -77,17 +72,18 @@
               root[PREFIX_FN + _aux[0]] = {};
             }
 
-            root[PREFIX_FN + _aux[0]][_aux[1]] = newCreatedFunction;
+            root[PREFIX_FN + _aux[0]][_aux[1]] = jsFunction;
           } else {
-            root[PREFIX_FN + exportedFns[i][j]] = newCreatedFunction;
+            root[PREFIX_FN + exportedFns[i][j]] = jsFunction;
           }
         }
       }
 
     }();
 
+    // ajax call using promise
 
-    function getRemotePromise(request) {
+    function getRemote(request) {
 
       var request = JSON.parse(JSON.stringify(request)); // clone object
 
@@ -105,16 +101,13 @@
 
           try {
 
-            var objson = jQuery.parseJSON(data); // errors no controlats
+            var objson = $.parseJSON(data);
 
-          } catch(e) {
+          } catch(e) { // catch unexpected errors
 
             objson = {};
 
-            if(/error|warning/.test(data.toLowerCase())) {
-
-              objson.error = data; // altres errors no controlats
-            }
+            objson.error = data;
 
           }
 
@@ -124,7 +117,8 @@
 
           } else if(objson.error) {
 
-            alert(objson.error + ' - function: ' + request.php_function);
+            if(THROW_ALERTS)
+              alert(objson.error + ' - function: ' + request.php_function);
 
             reject(objson.error);
 
@@ -136,23 +130,24 @@
 
         }).fail(function(jqXHR, textStatus) {
 
-          alert("Request failed: " + textStatus);
+          if(THROW_ALERTS)
+            alert("Request failed: " + textStatus);
+
+          reject("Request failed: " + textStatus);
 
         }).always(function() {
-
-          console.log('activeProcesses:', activeProcesses);
 
           activeProcesses--;
 
           if(activeProcesses == 0 && loadingObj) {
-            console.log('processes finished', loadingObj);
             loadingObj.hide();
           }
 
         }); // end ajax
 
       }); // end promise
-    }
+
+    } // end getRemote
 
 
 })( jQuery, window, optionsApp);
@@ -163,8 +158,10 @@ Promise.prototype.exec = function(fn) {
     return this.then(fn);
 };
 
+Promise.prototype.error = function(fn) {
+    return this.catch(fn);
+};
 
-// method as a prototype function
 // escape HTML tags as HTML entities
 
 String.prototype.escape = function() {

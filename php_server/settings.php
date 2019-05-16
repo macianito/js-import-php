@@ -47,6 +47,8 @@ define('URL_ABS_PATH', 'http://' . $_SERVER['HTTP_HOST'] . URL_RELATIVE_PATH . P
 
 define('PREFIX_FN', '$'); // javascript functions prefix
 
+define('THROW_ALERTS', false); // javascript functions prefix
+
 /*--------------------------------------------------------------
   # Include libraries
 --------------------------------------------------------------*/

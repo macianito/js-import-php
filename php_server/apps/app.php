@@ -1,5 +1,7 @@
 <?php
 
+/* default app */
+
 class Foo {
 
 
@@ -10,7 +12,12 @@ class Foo {
 
     }
 
-    public function get_Foo($arg1, $arg2 = 'gtg') {
+    public function method($arg1, $arg2 = 'gtg') {
+        return 'method result';
+    }
+
+
+    public function get_Foo($arg1, $arg2 = 'arg2') {
         return 'Foo ' . $this->prop1 . ' ' . $this->prop2 . ' ' . $arg1 . ' ' . $arg2;
     }
 
