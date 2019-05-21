@@ -32,13 +32,21 @@
 
     function $php(func, args) {
 
+      var params = $isDefined(args) ? args[args.length - 1] : {};
+
+      if(params instanceof $Params) {
+        delete args[args.length - 1];
+      } else {
+        params = {};
+      }
+
       var data = {
         php_function: func,
         args: args,
         app : app
       };
 
-      return getRemote(data);
+      return getRemote(data, params);
 
     }
 
@@ -83,7 +91,7 @@
 
     // ajax call using promise
 
-    function getRemote(request) {
+    function getRemote(request, params) {
 
       var request = JSON.parse(JSON.stringify(request)); // clone object
 
@@ -94,8 +102,19 @@
           url: remoteUrl,
           data: request,
           beforeSend: function(jqXHR) {
+
             activeProcesses++;
-            loadingObj && loadingObj.show();
+
+            if($isDefined(params.beforeSend)) {
+
+              params.beforeSend();
+
+            } else {
+
+              loadingObj && loadingObj.show();
+
+            }
+
           }
         }).done(function( data ) {
 
@@ -115,6 +134,7 @@
 
             resolve(objson.ok);
 
+
           } else if(objson.error) {
 
             if(THROW_ALERTS)
@@ -122,13 +142,14 @@
 
             reject(objson.error);
 
+
           } else {
 
             reject('Unexpected error');
 
           }
 
-        }).fail(function(jqXHR, textStatus) {
+        }).fail(function(jqXHR, textStatus) { // failed request
 
           if(THROW_ALERTS)
             alert("Request failed: " + textStatus);
@@ -139,9 +160,18 @@
 
           activeProcesses--;
 
-          if(activeProcesses == 0 && loadingObj) {
-            loadingObj.hide();
+          if($isDefined(params.always)) {
+
+            params.always();
+
+          } else {
+
+            if(activeProcesses == 0 && loadingObj) {
+              loadingObj.hide();
+            }
+
           }
+
 
         }); // end ajax
 
@@ -177,3 +207,46 @@ String.prototype.escape = function() {
 
 //var a = "<abc>";
 //var b = a.escape(); // "&lt;abc&gt;"
+
+
+function $Params(params) {
+
+  this.loadParams(params);
+
+}
+
+$Params.prototype.removeParams = function() {
+
+  for(var i in this) {
+    // obj.hasOwnProperty() is used to filter out properties from the object's prototype chain
+    delete this[i];
+  }
+
+  return this;
+
+};
+
+$Params.prototype.loadParams = function(params) {
+
+  this.removeParams();
+
+  for(var i in params) {
+    // obj.hasOwnProperty() is used to filter out properties from the object's prototype chain
+    this[i] = params[i];
+  }
+
+  return this;
+
+};
+
+//var obj = new $Params({r: 'ff', t: 'gg'});
+//console.log(obj.removeParams());
+
+function $isDefined(ele) {
+
+  return typeof ele !== 'undefined';
+
+}
+
+
+

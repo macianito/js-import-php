@@ -41,7 +41,7 @@
          resultObj.html(result.join('<br>') + '<br><br>');
        });
 
-       $system('ls -l').then(function(result) {
+       $system('ls -l', new $Params({always: function(r) { alert('always!!') }}) ).then(function(result) {
          resultObj.append(result + '<br><br>');
        });
 
@@ -59,6 +59,12 @@
 
        }).error(function(result) {
           alert('catched error: ' + result);
+       });
+
+       $Foo.obj_method({attr1 : 'attributte 1', attr2 : 'attributte 2'}).then(function(result) { // has de posar o no les cometes
+         resultObj.append(result + '<br><br>');
+       }).error(function(result) {
+          alert(result);
        });
 
        $Foo.method("arrgg1", 6).then(function(result) { // has de posar o no les cometes

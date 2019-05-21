@@ -13,6 +13,14 @@ class Foo {
 
     }
 
+
+    public function obj_method($obj)
+    {
+
+       print_r($obj);
+
+    }
+
 }
 
 function no_return() {
