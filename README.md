@@ -51,7 +51,7 @@ $str_replace(' ').then(function(result) {
 
 ```
 
-You could call a php function using the result of a previous called php function as a parameter, thus concatenating several function calls.
+You can call a php function using the result of a previous called php function as a parameter, thus concatenating several function calls.
 Here is an example of this.
 
 ```jsx
