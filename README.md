@@ -55,9 +55,9 @@ You can call a php function using the result of a previous called php function a
 Here is an example of this.
 
 ```jsx
-$testfn(34, 56).exec(function(result) { // has de posar o no les cometes
-   return $testfn(34, result);
-}).exec(function(result) { // has de posar o no les cometes
+$testfn(34, 56).exec(function(result) { // first call
+   return $testfn(34, result); // second call call with the result of the first call as a parameter
+}).exec(function(result) {
    resultObj.append('result: ' + result + '<br><br>');
 });
 ```
