@@ -33,7 +33,8 @@ Download the [code](https://github.com/macianito/js-import-php/) that is in the 
 
 ## Examples
 
-We have several examples [on the website](https://mazius.org/). Here is one to get you started:
+We have several examples [on the website](https://mazius.org/). Here are some examples to get you started:
+These examples will put the result of each called php function into a container on the page.
 
 ```jsx
 $scandir(PATH_TO_FOLDER).then(function(result) {
@@ -50,7 +51,17 @@ $str_replace(' ').then(function(result) {
 
 ```
 
-This example will put the result of each called php function into a container on the page.
+You could call a php function using the result of a previous called php function as a parameter, thus concatenating several function calls.
+Here is an example of this.
+
+```jsx
+$testfn(34, 56).exec(function(result) { // has de posar o no les cometes
+   return $testfn(34, result);
+}).exec(function(result) { // has de posar o no les cometes
+   resultObj.append('result: ' + result + '<br><br>');
+});
+```
+
 
 ## Live Example
 
