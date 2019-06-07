@@ -105,7 +105,7 @@
 
             activeProcesses++;
 
-            if($isDefined(params.beforeSend)) {
+            if($isDefined(params.beforeExec)) {
 
               params.beforeSend();
 
@@ -211,11 +211,11 @@ String.prototype.escape = function() {
 
 function $Params(params) {
 
-  this.loadParams(params);
+  this.load(params);
 
 }
 
-$Params.prototype.removeParams = function() {
+$Params.prototype.remove = function() {
 
   for(var i in this) {
     // obj.hasOwnProperty() is used to filter out properties from the object's prototype chain
@@ -226,12 +226,22 @@ $Params.prototype.removeParams = function() {
 
 };
 
-$Params.prototype.loadParams = function(params) {
+$Params.prototype.load = function(params) {
 
-  this.removeParams();
+  this.remove();
 
   for(var i in params) {
     // obj.hasOwnProperty() is used to filter out properties from the object's prototype chain
+    this[i] = params[i];
+  }
+
+  return this;
+
+};
+
+$Params.prototype.add = function(params) {
+
+  for(var i in params) {
     this[i] = params[i];
   }
 
