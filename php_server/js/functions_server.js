@@ -55,7 +55,17 @@
 
     !function setupFunctions() {
 
+      if(!$isDefined(exportedFns.fns)) {
+        alert('\'fns\' key is missing in exported functions. You must provide this key');
+        return false;
+      }
+
       for(var i in exportedFns) {
+
+        if(!Array.isArray(exportedFns[i])) {
+           alert('\'' + i + ' element\' in exported functions must be an array');
+           return false;
+        }
 
         for(var len = exportedFns[i].length, j = 0; j < len; j++) {
 
