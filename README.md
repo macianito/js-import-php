@@ -30,6 +30,16 @@ Download the [code](https://github.com/macianito/js-import-php/) that is in the 
 ```html
 <script type="text/javascript" src="path_to_php_server/?app=path_to_app"></script>
 ```
+The url paramameter(variable) **app** is optional, and it allows to set the path to the application that will be loaded. If not provided, the default application will be loaded
+
+You can use the **$exported_fns** array to define which functions you want to load in your application.
+
+ - To include functions, use the key *'fns'* and an array with the funcion's names as the associated value.
+
+ - To include a class and its methods use name of the class as the key and an array with the method's names as the value of the key.
+
+Also you can use the **$not_allowed_fns** array to don't allow whatever functions you put in it.
+
 
 ## Examples
 
@@ -55,9 +65,9 @@ You can call a php function using the result of a previous called php function a
 Here is an example of this.
 
 ```jsx
-$testfn(34, 56).exec(function(result) { // has de posar o no les cometes
-   return $testfn(34, result);
-}).exec(function(result) { // has de posar o no les cometes
+$testfn(34, 56).exec(function(result) { // first call
+   return $testfn(34, result); // second call call with the result of the first call as a parameter
+}).exec(function(result) {
    resultObj.append('result: ' + result + '<br><br>');
 });
 ```
