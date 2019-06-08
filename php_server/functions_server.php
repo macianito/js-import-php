@@ -69,11 +69,11 @@ try {
 
        // Function cheking
 
-       if(!in_array($function, $exported_fns['internal']) && !in_array($function, $exported_fns['user'])) {
+       if(!in_array($function, $exported_fns['fns'])) {
 
          throw new Exception("Function {$function} doesn't exist");
 
-       } elseif(in_array($function, $not_allowed_methods)) {
+       } elseif(in_array($function, $not_allowed_fns)) {
 
          throw new Exception("Function {$function} is not allowed");
 

@@ -97,18 +97,16 @@ if(!isset($exported_fns)) {
   $defined_functions = get_defined_functions();
 
   $exported_fns = array(
-    //'internal' => array('file_get_contents', 'file_put_contents', 'unlink', 'scandir'), // functions example
-    'internal' => $defined_functions['internal'],
-    'user'     => $defined_functions['user'],
+    'fns'      => array_merge($defined_functions['internal'], $defined_functions['user']),
     //'foo'    => array('Foo.index', 'Foo.get_Foo'), // object methods example
     'Foo'      => get_methods_from_class('Foo') // object methods example
   );
 
 }
 
-if(!isset($not_allowed_methods)) {
-  $not_allowed_methods = array( // this methods are not allowed
-  //'str_replace',
+if(!isset($not_allowed_fns)) {
+  $not_allowed_fns = array( // this methods are not allowed
+  // 'str_replace',
   );
 }
 

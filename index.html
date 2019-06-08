@@ -31,11 +31,7 @@
 
      var resultObj = jQuery('#result');
 
-       //scandir(processScandir, "./folder-test/");
-
-       //Foo.get_Foo(processFoo, "arrgg1", 6); // has de posar o no les cometes
-
-       //console.log(window);
+       console.log(window);
 
        $scandir(FILES_PATH).then(function(result) {
          resultObj.html(result.join('<br>') + '<br><br>');
@@ -47,6 +43,8 @@
 
        $str_replace(' ').then(function(result) {
          resultObj.append(result + '<br><br>');
+       }).error(function(result) {
+          alert(result);
        });
 
        $testfn(34, 56).exec(function(result) { // has de posar o no les cometes
