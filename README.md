@@ -32,11 +32,21 @@ Download the [code](https://github.com/macianito/js-import-php/) that is in the 
 ```
 The url paramameter(variable) **app** is optional, and it allows to set the path to the application that will be loaded. If not provided, the default application will be loaded
 
-You can use the **$exported_fns** array to define which functions you want to load in your application.
+You can use the **$exported_fns** array to define which functions you want to load in your application. Define it in your application code or in the file **settings.php**
 
  - To include functions, use the key *'fns'* and an array with the funcion's names as the associated value.
 
  - To include a class and its methods use name of the class as the key and an array with the method's names as the value of the key.
+ 
+```php
+  // Example
+
+  $exported_fns = array(
+    'fns'      => array_merge($defined_functions['internal'], ['name_function1','name_function2']), // functions
+    'Foo'      => get_methods_from_class('Foo') // class methods example
+  );
+
+```
 
 Also you can use the **$not_allowed_fns** array to don't allow whatever functions you put in it.
 
