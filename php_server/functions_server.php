@@ -102,7 +102,10 @@ try {
 
      if($last_error) {
 
-       $result = $last_error['message'];
+       $result = json_encode([
+	       'message' => strip_tags($last_error['message']),
+	       'result'  => $result
+	     ]);
 
      } elseif($result === null) {
 
