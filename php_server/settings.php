@@ -17,7 +17,7 @@ header('Access-Control-Allow-Origin: *');
 --------------------------------------------------------------*/
 
 if ($_SERVER['SERVER_ADDR'] != $_SERVER['REMOTE_ADDR']){
-  $this->output->set_status_header(400, 'No Remote Access Allowed');
+  header('HTTP/1.1 401 Unauthorized', true, 401);
   exit; //just for good measure
 }
 
