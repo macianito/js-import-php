@@ -174,13 +174,12 @@
 
             params.always();
 
-          } else {
-
-            if(activeProcesses == 0 && loadingObj) {
-              loadingObj.hide();
-            }
-
           }
+          
+          if(activeProcesses == 0 && loadingObj) {
+            loadingObj.hide();
+          }
+
 
 
         }); // end ajax
