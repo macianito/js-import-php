@@ -92,7 +92,7 @@ try {
 
      $last_error = error_get_last();
 
-     if($result && !$last_error) { // php echoed error strings are catched with $last_error
+      if($result && (!$last_error || !in_array($last_error['type'], [1, 4])) ) { // php echoed error strings are catched with $last_error
 
        die(json_encode (array('ok' => $result)));
 
