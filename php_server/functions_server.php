@@ -103,7 +103,7 @@ try {
      if($last_error) {
 
        $result = json_encode([
-	       'message' => strip_tags($last_error['message']),
+	       'message' => $last_error['type'] . ' - ' . strip_tags($last_error['message']) . $last_error['file'] . ':' . $last_error['line'],
 	       'result'  => $result
 	     ]);
 
