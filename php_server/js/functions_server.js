@@ -23,7 +23,7 @@
 
       loadingObj = (typeof options.loadingObj  !== 'undefined')
         ? $('#' + options.loadingObj)
-        : ($('#loader-fn').lenght > 0)
+        : ($('#loader-fn').length > 0)
           ? $('#loader-fn')
           : null;
 
